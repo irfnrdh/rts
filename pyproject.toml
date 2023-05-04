@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "rts"
+version = "0.1.0"
+description = "Retas, Jangan direbetin!"
+authors = ["Irfannur Diah <irfnrdh@gmail.com>"]
+readme = "README"
+keywords = ["retas", "rts", "hacking", "cli"]
+include = [ "LICENSE.md" ]
+
+homepage = "https://lab.ruema.xyz/rts"
+repository = "https://github.com/irfnrdh/rts"
+documentation = "https://rts.gitbook.io/"
+
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: OS Independent"
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/irfnrdh/rts/issues"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pretty-errors = "1.2.25"
+click = "^8.1.3"
+
+[tool.poetry.dev-dependencies]
+flake8 = "5.0.4"
+black = "22.12.0"
+bandit = "1.7.5"
+pytest = "7.3.1"
+pytest-cov = "4.0.0"
+
+[tool.black]
+line-length = 100
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

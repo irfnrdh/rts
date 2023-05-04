@@ -1,0 +1,48 @@
+{
+    "title" : ":RTS",
+    "description" : "Jangan direbetin!",
+    "author": "@irfnrdh",
+    "menu": [
+            {
+                "title" : "Siapa Aku?",
+                "description" : "Device Discovery",
+                "options" : [
+                    {
+                        "name" : "Aku sedang berada dimana?",
+                        "command" : ["clear","pwd","cd /", "pacman -Syu"]
+                    },
+                    {
+                        "name" : "Berapa IP ku?",
+                        "command" : ["ping google.com"]
+                    },
+                    {
+                        "name" : "Perangkat yang tersedia?",
+                        "command" : ["ping google.com"]
+                    },
+                    {
+                        "name" : "Perangkat yang terhubung?",
+                        "command" : ["ping google.com"]
+                    },
+                    {
+                        "name" : "Alamat IP Lokal?",
+                        "command" : ["ping google.com"]
+                    }
+
+                ]
+            },
+            {
+                "title" : "Network",
+                "description" : "Network discovery tools",
+                "options" : [
+                    {
+                        "name" : "What is my network",
+                        "command" : ["iwconfig"]
+                    },
+                    {
+                        "name" : "Process in this device",
+                        "command" : ["htop"]
+                    }
+                ]
+            }
+    ]
+}

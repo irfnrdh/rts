@@ -1,0 +1,59 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  publish-on-pypi:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Project checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8.12'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3
+        with:
+          virtualenvs-create: false
+          virtualenvs-in-project: false
+
+      - name: Install dependencies
+        run: make setup
+
+      - name: Publish to Pypi
+        run: make deploy token=${{ secrets.PYPI_TOKEN }}
+
+  publish-on-ghcr:
+    runs-on: ubuntu-18.04
+    needs: [publish-on-pypi]
+    timeout-minutes: 10
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Project checkout
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Container Image
+        uses: docker/build-push-action@v4.0.0
+        with:
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
